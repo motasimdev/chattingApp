@@ -58,7 +58,7 @@ const SignUp = () => {
               </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-              <Button type="submit" className="w-full bg-gray-200">
+              <Button type="submit" className="w-full">
                 SignUp
               </Button>
             </CardFooter>
