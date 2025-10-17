@@ -19,10 +19,44 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
   const handleSignUpSubmit = (e) => {
-    e.preventDefault()
-    console.log("clicked");
+    e.preventDefault();
+    console.log("clicked", userInfo);
   };
+
+  // name
+  const handleNameInput = (e) => {
+    setUserInfo((prev) => {
+      return {
+        ...prev,
+        name: e.target.value,
+      };
+    });
+  };
+  // name
+  
+  // email
+  const handleEmailInput = (e) => {
+    setUserInfo((prev) => {
+      return {
+        ...prev,
+        name: e.target.value,
+      };
+    });
+  };
+  // email
+
+  // password
+  const handlePasswordInput = (e) => {
+    setUserInfo((prev) => {
+      return {
+        ...prev,
+        name: e.target.value,
+      };
+    });
+  };
+  // password
   return (
     <>
       <div className="max-w-[1320px] m-auto">
@@ -45,20 +79,14 @@ const SignUp = () => {
                   <div className="grid gap-2">
                     <Label htmlFor="email">Name</Label>
                     <Input
-                      id="email"
                       type="text"
                       placeholder="Your name"
-                      
+                      onChange={handleNameInput}
                     />
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      
-                    />
+                    <Input type="email" placeholder="m@example.com" onChange={handleEmailInput}/>
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
@@ -70,11 +98,11 @@ const SignUp = () => {
                         Forgot your password?
                       </a>
                     </div>
-                    <Input id="password" type="password"  />
+                    <Input id="password" type="password" onChange={handlePasswordInput}/>
                   </div>
                 </div>
                 <CardFooter className="flex-col gap-2 mt-4">
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" className="w-full cursor-pointer">
                     SignUp
                   </Button>
                 </CardFooter>
