@@ -17,7 +17,7 @@ const SignUp = () => {
   return (
     <>
       <div className="max-w-[1320px] m-auto">
-        <div className="">
+        <div className="py-10">
           <Card className="w-[400px] mx-auto">
             <CardHeader>
               <CardTitle>Signup to your account</CardTitle>
