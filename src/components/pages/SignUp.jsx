@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,6 +14,15 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleSignUpSubmit = (e) => {
+    e.preventDefault()
+    console.log("clicked");
+  };
   return (
     <>
       <div className="max-w-[1320px] m-auto">
@@ -26,20 +35,29 @@ const SignUp = () => {
               </CardDescription>
               <CardAction>
                 <Link to={"/login"}>
-                <Button variant="link">Log In</Button>
+                  <Button variant="link">Log In</Button>
                 </Link>
               </CardAction>
             </CardHeader>
             <CardContent>
-              <form>
+              <form onSubmit={handleSignUpSubmit}>
                 <div className="flex flex-col gap-6">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Name</Label>
+                    <Input
+                      id="email"
+                      type="text"
+                      placeholder="Your name"
+                      
+                    />
+                  </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="m@example.com"
-                      required
+                      
                     />
                   </div>
                   <div className="grid gap-2">
@@ -52,16 +70,16 @@ const SignUp = () => {
                         Forgot your password?
                       </a>
                     </div>
-                    <Input id="password" type="password" required />
+                    <Input id="password" type="password"  />
                   </div>
                 </div>
+                <CardFooter className="flex-col gap-2 mt-4">
+                  <Button type="submit" className="w-full">
+                    SignUp
+                  </Button>
+                </CardFooter>
               </form>
             </CardContent>
-            <CardFooter className="flex-col gap-2">
-              <Button type="submit" className="w-full">
-                SignUp
-              </Button>
-            </CardFooter>
           </Card>
         </div>
       </div>

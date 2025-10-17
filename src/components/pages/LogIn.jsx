@@ -14,14 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 
 const LogIn = () => {
-  const [userInfo , setUserInfo] = useState({
-    name: "",
-    email: "",
-    password: "",
-  })
-  console.log(userInfo);
-  
-
   return (
     <>
       <div className="max-w-[1320px] m-auto">
