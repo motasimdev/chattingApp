@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   Card,
   CardAction,
@@ -12,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({
@@ -22,7 +24,22 @@ const SignUp = () => {
 
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked", userInfo);
+    if (!userInfo.name || !userInfo.email || !userInfo.password) {
+      toast.error("Field is missing");
+    } else {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    }
   };
 
   // name
@@ -35,13 +52,13 @@ const SignUp = () => {
     });
   };
   // name
-  
+
   // email
   const handleEmailInput = (e) => {
     setUserInfo((prev) => {
       return {
         ...prev,
-        name: e.target.value,
+        email: e.target.value,
       };
     });
   };
@@ -52,13 +69,14 @@ const SignUp = () => {
     setUserInfo((prev) => {
       return {
         ...prev,
-        name: e.target.value,
+        password: e.target.value,
       };
     });
   };
   // password
   return (
     <>
+      <Toaster />
       <div className="max-w-[1320px] m-auto">
         <div className="py-10">
           <Card className="w-[400px] mx-auto">
@@ -86,7 +104,11 @@ const SignUp = () => {
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input type="email" placeholder="m@example.com" onChange={handleEmailInput}/>
+                    <Input
+                      type="email"
+                      placeholder="m@example.com"
+                      onChange={handleEmailInput}
+                    />
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
@@ -98,7 +120,11 @@ const SignUp = () => {
                         Forgot your password?
                       </a>
                     </div>
-                    <Input id="password" type="password" onChange={handlePasswordInput}/>
+                    <Input
+                      id="password"
+                      type="password"
+                      onChange={handlePasswordInput}
+                    />
                   </div>
                 </div>
                 <CardFooter className="flex-col gap-2 mt-4">
